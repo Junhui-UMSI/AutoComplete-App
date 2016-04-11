@@ -1,18 +1,21 @@
 # AutoComplete-App
-## Implements
+## Implement
 After clonning this git repository, simply direct to the local folder and type the following command
 ```javascript
 npm install
 gulp serve
 ```
-You should see this after the app is successfully runned
+You should see this after the app is successfully runned,Yah!
 ![download](app/images/1.png)
 
 ## Folder Structure
 I'm using gulp to serve this application locally, therefore there are two folders in this app. The app folder is where the source file located. While the Build folder is where the distribution files located.
 
 ## Thinking Process of the app
-The main idea for this app is simple, I choose the Trie for searching, whenever user input value, it will go thorugh the hanndleChange and set different value for the output state. I want this application to be <strong>straightforward, clean and easy to grow bigger.</strong> Some of the main ideas are as follows.
+The main idea for this app is simple: 
+Whenever user input some value, it will go through some validation, if it matches the search requirement, it will be sent to Trie for searching and return the search result to the web page. If the user input doesn't match the search request(like less than three characters), it will also render back a message to inform user. 
+
+I want this application to be <strong>straightforward, clean and easy to grow bigger.</strong> Some of the main ideas are as follows.
 
 1. I choose Gulp to serve this app because it allows me to see the change automatically without refreshing the web page. Besides, it is clear to see where I went wrong in the terminal when an error is occured.
 
