@@ -100,7 +100,6 @@ var SearchBox = _react2['default'].createClass({
     return _react2['default'].createElement(
       'div',
       { className: 'commentBox' },
-      'AutoComplete Application for Guidebook',
       _react2['default'].createElement(
         'form',
         null,
