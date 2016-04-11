@@ -32,7 +32,7 @@ var SearchBox = React.createClass({
       }
       else if(inputText.length <3 && inputText.length >0){
         this.setState({
-          searchResult:["Please type in at least three words to complete search "]
+          searchResult:["Please type in at least three characters to complete search "]
         });
       }
       else if(inputText.length == 0){
