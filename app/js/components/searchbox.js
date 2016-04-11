@@ -3,72 +3,59 @@ import Tries from './trie';
 import cities from './dataEndpoint';
 
 
-var CommentBox = React.createClass({
+var SearchBox = React.createClass({
 
 /**	 initialState ==============================================================
-  *  set initial state of the input text filed, the search key word and the search result.
+  *  construt the search tree (trie) based on the input dataEndpoint
+  *  set initial state of the cities, searchResult and trie.
 */
     getInitialState: function(){
+      var trie = new Tries("0");
+      var i;
+      for (i = 0; i < cities.length; i++) {
+          trie.put(cities[i]);
+      };
       return {
         cities: cities,
-        keyword: "",
-        searchResult:[]
+        searchResult:[],
+        trie: trie
       };
     },
 
-/**	 performSearchInKeyword ====================================================
-  *  Take the search keyword into the autocomplete function and return search result
-*/
-    performSearchInKeyword: function(keyword){
-      return this.autoComplete(keyword);
-    },
-
 /**	 handleChange ==============================================================
-  *  Handle the change of the state according to the user input. display different message according to the input message length.
+  *  Handle the change of the state according to the user input.
 */
     handleChange: function(event){
-      console.log(event.target.value);
-      this.setState({
-        keyword: event.target.value
-      });
       var inputText = event.target.value;
       if(inputText.length >=3){
-        var result = this.performSearchInKeyword(inputText);
-        console.log(result);
+        this.autoComplete(inputText);
       }
       else if(inputText.length <3 && inputText.length >0){
-        this.state.trie = "Please type in at least three words to complete search ";
+        this.setState({
+          searchResult:["Please type in at least three words to complete search "]
+        });
       }
       else if(inputText.length == 0){
-        this.state.trie = " ";
+        this.setState({
+          searchResult:[]
+        });
       };
     },
 
 /**	 Auto Complete =============================================================
-  * Auto Complete:
-  *     - Goal: Use Tries to generate the search tree
-  *     - Input the character (including space, etc)
-  *     - Output: the current node representing the
+  * adopt the value of user input and use trie to search through the list and
+   return all the results that match the user input.
 */
     autoComplete: function(input) {
-        // const cities = this.state.cities;
-        var trie = new Tries("0");
-        var i;
-        for (i = 0; i < cities.length; i++) {
-            trie.put(cities[i]);
-        };
-        console.log(trie);
-        var searchresult = trie.getAll(input).toString().split(' ');
-        this.state.trie = searchresult;
-        return trie.getAll(input);
+        this.setState({
+          searchResult:this.state.trie.getAll(input)
+        });
     },
 
 
 /**	 Render =====================================================================
   * Render:
-  *     - Goal: Use Tries to generate the search tree
-  *     - Input the character (including space, etc)
-  *     - Output: the current node representing the
+  *    - render back the DOM elements to the page
  */
     render: function () {
         return (
@@ -77,16 +64,27 @@ var CommentBox = React.createClass({
                 <form>
                 <input
                   type = "text"
-                  onChange={this.handleChange}
                   ref = "textarea"
-                  value = {this.state.keyword}
                   autoFocus = "true" //autofocus on the input filed when page is rendered
+                  onChange={this.handleChange}
                 />
                 </form>
-                <ul>Search Result: {this.state.trie}</ul>
+                <ResultList searchResult = {this.state.searchResult} />
             </div>
         );
     }
 });
 
-export default CommentBox;
+/**	 ResultList   ==============================================================
+  *  Place the result in a list for better UI experience
+*/
+var ResultList = React.createClass({
+  render: function() {
+    var resultItem = function(searchResult) {
+      return <li>{searchResult}</li>;
+    };
+    return <ul>{this.props.searchResult.map(resultItem)}</ul>;
+  }
+});
+
+export default SearchBox;

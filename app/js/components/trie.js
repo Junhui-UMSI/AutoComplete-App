@@ -51,6 +51,7 @@ Tries.prototype.getAll = function(name) {
         }
     }
     if (node === undefined) {
+      resultList.push("No Result found");
       return resultList;
     }
 
