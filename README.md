@@ -6,3 +6,4 @@ After clonning this git repository, simply direct to the local folder and type t
 npm install
 gulp serve
 ```
+You should see this after the project is succeessfully runed
