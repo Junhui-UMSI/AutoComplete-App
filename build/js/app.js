@@ -73,7 +73,7 @@ var SearchBox = _react2['default'].createClass({
       this.autoComplete(inputText);
     } else if (inputText.length < 3 && inputText.length > 0) {
       this.setState({
-        searchResult: ["Please type in at least three words to complete search "]
+        searchResult: ["Please type in at least three characters to complete search "]
       });
     } else if (inputText.length == 0) {
       this.setState({
@@ -141,16 +141,18 @@ exports['default'] = SearchBox;
 module.exports = exports['default'];
 
 },{"./dataEndpoint":2,"./trie":4,"react":160}],4:[function(require,module,exports){
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
 function Tries(key) {
     this.key = key;
     this.child = {};
 }
-
+/**	 put ==============================================================
+  *  construct a Search Tree based on the input data list
+*/
 Tries.prototype.put = function (name) {
     var node = this;
     var len = name.length;
@@ -160,24 +162,12 @@ Tries.prototype.put = function (name) {
     for (i = 0; i < len; i++) {
         currentLetter = name[i];
         node = node.child[currentLetter] || (node.child[currentLetter] = new Tries(currentLetter));
-        // node = node[currentLetter] || (node[currentLetter] = new Tries(currentLetter));
     }
     node.name = name;
 };
-
-Tries.prototype.get = function (name) {
-    var node = this;
-    var len = name.length;
-    var i, node;
-    for (i = 0; i < len; i++) {
-        if (!(node = node.child[name[i]])) {
-            break;
-        }
-    }
-
-    return i === len ? node.name : 'not found';
-};
-
+/**	 getall ==============================================================
+  *  get all elements in the tree that matches the search input
+*/
 Tries.prototype.getAll = function (name) {
     var node = this;
     var len = name.length;
@@ -217,16 +207,12 @@ Tries.prototype.getAll = function (name) {
                 que.push(node.child[keys[i]]);
             };
         }
-        // else if (node.child.length == 0 && resultList.length == 0){
-        //    console.log(node.name);
-        //    resultList.push("Noresult");
-        // }
     }
     return resultList;
 };
 
-exports['default'] = Tries;
-module.exports = exports['default'];
+exports["default"] = Tries;
+module.exports = exports["default"];
 
 },{}],5:[function(require,module,exports){
 // shim for using process in browser

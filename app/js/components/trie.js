@@ -2,7 +2,9 @@ function Tries(key) {
     this.key = key;
     this.child = {};
 }
-
+/**	 put ==============================================================
+  *  construct a Search Tree based on the input data list
+*/
 Tries.prototype.put = function(name) {
     var node = this;
     var len = name.length;
@@ -15,7 +17,9 @@ Tries.prototype.put = function(name) {
     }
     node.name = name;
 }
-
+/**	 getall ==============================================================
+  *  get all elements in the tree that matches the search input
+*/
 Tries.prototype.getAll = function(name) {
     var node = this;
     var len = name.length;
