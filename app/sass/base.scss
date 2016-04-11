@@ -29,8 +29,8 @@ li {
   border-bottom: 0.5px solid #233;
   line-height: 40px;
   font-size: 20px;
-  text-align: center;
   margin: 0 auto;
+  text-align: left;
 }
 ul {
   padding: 0px;
@@ -55,12 +55,4 @@ input:focus {
   outline-width: 0px;
   line-height: 40px;
   font-size: 25px;
-}
-.background {
-  margin: 0 auto;
-  width: 80%;
-  height: 100%;
-}
-span{
-  text-align: center;
 }
