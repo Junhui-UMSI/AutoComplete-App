@@ -60,7 +60,7 @@ var SearchBox = React.createClass({
     render: function () {
         return (
             <div className="commentBox">
-                
+
                 <form>
                 <input
                   type = "text"

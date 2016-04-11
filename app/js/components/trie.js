@@ -12,22 +12,8 @@ Tries.prototype.put = function(name) {
     for (i = 0; i < len; i++) {
         currentLetter = name[i];
         node = node.child[currentLetter] || (node.child[currentLetter] = new Tries(currentLetter));
-        // node = node[currentLetter] || (node[currentLetter] = new Tries(currentLetter));
     }
     node.name = name;
-}
-
-Tries.prototype.get = function(name) {
-    var node = this;
-    var len = name.length;
-    var i, node;
-    for (i = 0; i < len; i++) {
-        if (!(node = node.child[name[i]])) {
-            break;
-        }
-    }
-
-    return (i === len)? node.name : 'not found';
 }
 
 Tries.prototype.getAll = function(name) {
@@ -69,10 +55,6 @@ Tries.prototype.getAll = function(name) {
                 que.push(node.child[keys[i]]);
             };
         }
-        // else if (node.child.length == 0 && resultList.length == 0){
-        //    console.log(node.name);
-        //    resultList.push("Noresult");
-        // }
     }
     return resultList;
 }
